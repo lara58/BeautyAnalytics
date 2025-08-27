@@ -1,0 +1,108 @@
+
+# Beauty Trends & Insights – Big Data SEO Project
+
+## Description du projet
+Ce projet vise à analyser les tendances cosmétiques et à améliorer la visibilité SEO d’une marque grâce à une approche Data-Driven.
+Nous exploitons des jeux de données Kaggle, les Google Trends, Pinterest Trends et les informations issues des marketplaces pour :
+- Identifier les produits cosmétiques les plus populaires.
+- Comprendre la saisonnalité et les tendances émergentes.
+- Proposer des recommandations SEO pour renforcer la visibilité en ligne.
+
+## Objectifs
+- Améliorer le référencement naturel (SEO).
+- Anticiper les pics saisonniers pour ajuster la stratégie marketing.
+- Identifier les best-sellers cosmétiques par catégorie et marque.
+- Détecter les tendances émergentes via Google Trends & Pinterest Trends.
+- Mettre en avant les produits selon les événements clés (ex. fête des mères).
+
+## Architecture du projet
+
+```
+BeautyTrends/
+│
+├── data/
+│   ├── raw/               # Données brutes Kaggle, Trends, Pinterest
+│   ├── processed/         # Données nettoyées & normalisées
+│   ├── curated/           # Datasets finaux prêts pour analyse SEO & dashboard
+│
+├── notebooks/
+│   ├── 01_exploration.ipynb      # Analyse exploratoire & nettoyage des données
+│   ├── 02_trends_analysis.ipynb  # Croisement Google Trends / Kaggle
+│   ├── 03_competition.ipynb      # Analyse concurrentielle Amazon / Sephora
+│
+├── scripts/
+│   ├── ingestion_kaggle.py       # Ingestion dataset Kaggle
+│   ├── pytrends_fetch.py         # Extraction des tendances Google Trends
+│   ├── data_cleaning.py          # Nettoyage, dédoublonnage & enrichissement
+│   ├── build_dataset.py          # Fusion des datasets → CSV final enrichi
+│
+├── dashboard/
+│   ├── Beauty_Trends.pbix        # Dashboard Power BI interactif
+│   └── dashboard_mockup.png      # Aperçu du dashboard
+│
+├── README.md
+└── requirements.txt
+```
+
+## Sources de données
+
+| Source | Description | Format |
+|------------------------|-------------------------------------------|------------|
+| [Kaggle – Cosmetics Dataset](https://www.kaggle.com/datasets/devi5723/e-commerce-cosmetics-dataset) | Produits Amazon & Sephora | CSV |
+| [Kaggle Sephora](https://www.kaggle.com/datasets/raghadalharbi/all-products-available-on-sephora-website/data) | Détails produits Sephora | CSV |
+| [Google Trends API](https://trends.google.com) | Popularité des mots-clés cosmétiques | JSON/CSV |
+| [Pinterest Trends](https://trends.pinterest.com/) | Tendances émergentes beauté | API/CSV |
+| Open Beauty Facts | Labels bio, vegan, clean beauty, ingrédients | CSV |
+
+## Analyses réalisées
+
+### 1. Popularité des mots-clés
+- Identification des termes les plus recherchés.
+- Analyse saisonnière des volumes de recherche via Google Trends.
+
+### 2. Analyse des best-sellers
+- Classement des produits cosmétiques selon :
+  - noofratings → proxy de popularité.
+  - rating → qualité perçue.
+
+### 3. Analyse concurrentielle
+- Comparatif Amazon vs Sephora :
+  - Prix.
+  - Nombre d’avis.
+  - Positionnement produit.
+
+### 4. Détection des tendances émergentes
+- Exploitation de Pinterest Trends et Google Trends.
+- Mapping des nouvelles catégories : skincare coréen, clean beauty, etc.
+
+## Dashboards & KPI
+
+Le tableau de bord Power BI fournit :
+- Top 200 produits cosmétiques (par popularité et note).
+- Répartition Amazon vs Sephora.
+- Tendances Google Trends par région et par saison.
+- Produits émergents via Pinterest Trends.
+- KPI SEO clés :
+  - Part de requêtes Top 3 / Top 10.
+  - CTR organique.
+  - Évolution du trafic SEO.
+
+## Technologies utilisées
+- Python : pandas, numpy, pytrends, matplotlib
+- Big Data : DataLake (HDFS / MinIO / S3), Parquet, Delta Lake
+- SEO & Tendances : Google Trends API, Pinterest Trends
+- Dashboarding : Power BI
+- Exploration : Jupyter Notebooks
+
+## Résultats attendus
+- +40 % d’augmentation du trafic organique.
+- +25 % d’amélioration du CTR.
+- Réduction du time-to-market pour les nouvelles tendances.
+- Vision concurrentielle permettant d’ajuster prix et campagnes.
+
+## Auteur
+
+Mouna KHOLASSI
+Narimane TAHIR  
+Khelifi Lidia
+
