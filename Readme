@@ -1,108 +1,135 @@
 
-# Beauty Trends & Insights – Big Data SEO Project
+# Beauty Trends & Insights – SEO & Data pour une Marque de Cosmétiques
+
+Bienvenue sur le projet **Beauty Trends & Insights**. Ce projet vise à booster la visibilité digitale d’une marque de cosmétiques grâce à l’analyse de données et à une stratégie SEO innovante.
+
+---
+
+## Sommaire
+- [Description du projet](#description-du-projet)
+- [Objectifs](#objectifs)
+- [Problématiques clés](#problématiques-clés)
+- [Stratégie proposée](#stratégie-proposée)
+- [Données exploitées](#données-exploitées)
+- [Sources de données](#sources-de-données)
+- [Résultats attendus](#résultats-attendus)
+- [Architecture du projet](#architecture-du-projet)
+- [Analyses prévues](#analyses-prévues)
+- [Technologies utilisées](#technologies-utilisées)
+- [Auteurs](#auteurs)
+
+---
 
 ## Description du projet
-Ce projet vise à analyser les tendances cosmétiques et à améliorer la visibilité SEO d’une marque grâce à une approche Data-Driven.
-Nous exploitons des jeux de données Kaggle, les Google Trends, Pinterest Trends et les informations issues des marketplaces pour :
-- Identifier les produits cosmétiques les plus populaires.
-- Comprendre la saisonnalité et les tendances émergentes.
-- Proposer des recommandations SEO pour renforcer la visibilité en ligne.
+Ce projet a pour but d’améliorer le **référencement naturel (SEO)** et la **visibilité digitale** d’une marque de cosmétiques grâce à l’analyse des données et des tendances émergentes.  
+L’objectif est d’optimiser les ventes en ligne en exploitant les comportements consommateurs, les pics de recherche et la veille concurrentielle.
+
+---
 
 ## Objectifs
-- Améliorer le référencement naturel (SEO).
-- Anticiper les pics saisonniers pour ajuster la stratégie marketing.
-- Identifier les best-sellers cosmétiques par catégorie et marque.
-- Détecter les tendances émergentes via Google Trends & Pinterest Trends.
-- Mettre en avant les produits selon les événements clés (ex. fête des mères).
+- Améliorer la visibilité SEO des produits cosmétiques
+- Anticiper les pics de saisonnalité et les tendances émergentes
+- Identifier les produits à promouvoir selon les périodes clés et les zones géographiques
+- Proposer des recommandations marketing et un reporting visuel via un **dashboard Power BI**
+
+---
+
+## Problématiques clés
+- Comment maximiser la visibilité des produits cosmétiques sur internet ?
+- Quels segments de marché cibler selon la saisonnalité et les tendances ?
+- Quels produits mettre en avant selon les cycles de consommation ?
+- Comment se différencier des concurrents sur Amazon, Sephora et AromaZone ?
+
+---
+
+## Stratégie proposée
+- Publier du **contenu tendance** basé sur Google Trends
+- Optimiser le contenu existant avec des **mots-clés SEO** pertinents
+- Planifier un **calendrier éditorial saisonnier** (ex : solaires en été, hydratants en hiver)
+- Adapter le contenu selon la zone géographique (France, Europe, Monde)
+- Promouvoir le **bon produit au bon moment** (ex : parfums pour la fête des mères)
+- Analyser le marché concurrentiel (Amazon, Sephora, AromaZone)
+- Optimiser la présence sur **YouTube** pour la visibilité
+
+---
+
+## Données exploitées
+- **Google Trends** : popularité des mots-clés cosmétiques
+- **Pinterest Trends** : détection des tendances émergentes beauté
+- **Kaggle** : datasets cosmétiques pour les produits les plus vendus (Amazon, Sephora)
+- **Scraping e-commerce** : collecte dynamique des données prix, ventes et avis
+
+---
+
+## Sources de données
+| Source | Description | Format |
+|--------|------------|--------|
+| [Google Trends API](https://trends.google.com/) | Popularité des mots-clés cosmétiques | CSV / JSON |
+| [Pinterest Trends API](https://trends.pinterest.com/) | Tendances beauté émergentes | CSV |
+| [Kaggle Cosmetics Dataset](https://www.kaggle.com/datasets/devi5723/e-commerce-cosmetics-dataset) | Produits Amazon & Sephora | CSV |
+| Web scraping Amazon / Sephora / AromaZone | Prix, ventes, produits populaires | JSON / CSV |
+
+---
+
+## Résultats attendus
+- **Augmentation du trafic organique** grâce à un meilleur positionnement SEO
+- **Amélioration des ventes** via la mise en avant de produits tendance
+- **Réduction du time-to-market** pour les campagnes marketing
+- **Vision concurrentielle claire** pour ajuster les prix et stratégies
+
+---
 
 ## Architecture du projet
 
-```
-BeautyTrends/
-│
-├── data/
-│   ├── raw/               # Données brutes Kaggle, Trends, Pinterest
-│   ├── processed/         # Données nettoyées & normalisées
-│   ├── curated/           # Datasets finaux prêts pour analyse SEO & dashboard
-│
-├── notebooks/
-│   ├── 01_exploration.ipynb      # Analyse exploratoire & nettoyage des données
-│   ├── 02_trends_analysis.ipynb  # Croisement Google Trends / Kaggle
-│   ├── 03_competition.ipynb      # Analyse concurrentielle Amazon / Sephora
-│
-├── scripts/
-│   ├── ingestion_kaggle.py       # Ingestion dataset Kaggle
-│   ├── pytrends_fetch.py         # Extraction des tendances Google Trends
-│   ├── data_cleaning.py          # Nettoyage, dédoublonnage & enrichissement
-│   ├── build_dataset.py          # Fusion des datasets → CSV final enrichi
-│
-├── dashboard/
-│   ├── Beauty_Trends.pbix        # Dashboard Power BI interactif
-│   └── dashboard_mockup.png      # Aperçu du dashboard
-│
-├── README.md
-└── requirements.txt
-```
+### 1. Couche d’ingestion
+**Objectif** : collecter les données brutes
+**Outils** :
+- Apache Kafka (ingestion temps réel)
+- API Google Trends et Pinterest
+- Datasets Kaggle
 
-## Sources de données
+### 2. Couche de persistance (Data Lake)
+**Objectif** : stocker et structurer les données
+**Structure** :
+- **Raw Zone** : données brutes (CSV, JSON)
+- **Processed Zone** : données nettoyées et enrichies
+- **Curated Zone** : datasets optimisés pour l’analyse SEO
+**Technologies** : HDFS / S3, Parquet, Delta Lake
 
-| Source | Description | Format |
-|------------------------|-------------------------------------------|------------|
-| [Kaggle – Cosmetics Dataset](https://www.kaggle.com/datasets/devi5723/e-commerce-cosmetics-dataset) | Produits Amazon & Sephora | CSV |
-| [Kaggle Sephora](https://www.kaggle.com/datasets/raghadalharbi/all-products-available-on-sephora-website/data) | Détails produits Sephora | CSV |
-| [Google Trends API](https://trends.google.com) | Popularité des mots-clés cosmétiques | JSON/CSV |
-| [Pinterest Trends](https://trends.pinterest.com/) | Tendances émergentes beauté | API/CSV |
-| Open Beauty Facts | Labels bio, vegan, clean beauty, ingrédients | CSV |
+### 3. Couche Insight / Analyse
+**Objectif** : transformer les données en insights exploitables
+**Analyses réalisées** :
+- Popularité des mots-clés par saison et par région
+- Identification des produits à mettre en avant
+- Analyse concurrentielle : prix, produits phares, positionnement
+- Recommandations de contenu (articles, vidéos, posts)
+**Outils** :
+- Spark / PySpark (Big Data)
+- Power BI (dashboards SEO & marketing)
+- Jupyter Notebook (exploration & visualisations)
 
-## Analyses réalisées
+---
 
-### 1. Popularité des mots-clés
-- Identification des termes les plus recherchés.
-- Analyse saisonnière des volumes de recherche via Google Trends.
+## Analyses prévues
+- **Top 10 des tendances de l'industrie cosmétique** (2025 & 2026)
+- **Tendances cosmétiques à surveiller** en 2025
+- Analyse des attentes et enjeux des **consommateurs beauté**
 
-### 2. Analyse des best-sellers
-- Classement des produits cosmétiques selon :
-  - noofratings → proxy de popularité.
-  - rating → qualité perçue.
-
-### 3. Analyse concurrentielle
-- Comparatif Amazon vs Sephora :
-  - Prix.
-  - Nombre d’avis.
-  - Positionnement produit.
-
-### 4. Détection des tendances émergentes
-- Exploitation de Pinterest Trends et Google Trends.
-- Mapping des nouvelles catégories : skincare coréen, clean beauty, etc.
-
-## Dashboards & KPI
-
-Le tableau de bord Power BI fournit :
-- Top 200 produits cosmétiques (par popularité et note).
-- Répartition Amazon vs Sephora.
-- Tendances Google Trends par région et par saison.
-- Produits émergents via Pinterest Trends.
-- KPI SEO clés :
-  - Part de requêtes Top 3 / Top 10.
-  - CTR organique.
-  - Évolution du trafic SEO.
+---
 
 ## Technologies utilisées
-- Python : pandas, numpy, pytrends, matplotlib
-- Big Data : DataLake (HDFS / MinIO / S3), Parquet, Delta Lake
-- SEO & Tendances : Google Trends API, Pinterest Trends
-- Dashboarding : Power BI
-- Exploration : Jupyter Notebooks
+- **Python** : pandas, numpy, pytrends, matplotlib
+- **Big Data** : HDFS / S3, DataLake, Parquet, Delta Lake
+- **SEO & Tendances** : Google Trends API, Pinterest Trends
+- **Dashboarding** : Power BI
+- **Scraping** : Selenium, BeautifulSoup
+- **Exploration** : Jupyter Notebooks
 
-## Résultats attendus
-- +40 % d’augmentation du trafic organique.
-- +25 % d’amélioration du CTR.
-- Réduction du time-to-market pour les nouvelles tendances.
-- Vision concurrentielle permettant d’ajuster prix et campagnes.
+---
 
-## Auteur
+## Auteurs
 
-Mouna KHOLASSI
-Narimane TAHIR  
-Khelifi Lidia
+- Mouna KHOLASSI
+- Narimane TAHIR
+- Khelifi Lidia
 
