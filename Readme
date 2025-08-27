@@ -1,31 +1,25 @@
 # Beauty Trends & Insights – SEO & Data pour une Marque de Cosmétiques
 
-<div align="center">
-  <img src="https://img.shields.io/badge/Status-En%20développement-yellow" alt="Statut: En développement">
-  <img src="https://img.shields.io/badge/Version-1.0-blue" alt="Version: 1.0">
-  <img src="https://img.shields.io/badge/Projet-SEO%20%26%20Data-brightgreen" alt="Projet: SEO & Data">
-</div>
+![Statut: En développement](https://img.shields.io/badge/Status-En%20développement-yellow)
+![Version: 1.0](https://img.shields.io/badge/Version-1.0-blue)
+![Projet: SEO & Data](https://img.shields.io/badge/Projet-SEO%20%26%20Data-brightgreen)
 
-<br>
-
-<div align="center">
-  <p><em>Booster la visibilité digitale d'une marque de cosmétiques grâce à l'analyse de données et à une stratégie SEO innovante.</em></p>
-</div>
+*Booster la visibilité digitale d'une marque de cosmétiques grâce à l'analyse de données et à une stratégie SEO innovante.*
 
 ---
 
 ## 📋 Sommaire
-- [Description du projet](#-description-du-projet)
-- [Objectifs](#-objectifs)
-- [Problématiques clés](#-problématiques-clés)
-- [Stratégie proposée](#-stratégie-proposée)
-- [Données exploitées](#-données-exploitées)
-- [Sources de données](#-sources-de-données)
-- [Résultats attendus](#-résultats-attendus)
-- [Architecture du projet](#-architecture-du-projet)
-- [Analyses prévues](#-analyses-prévues)
-- [Technologies utilisées](#-technologies-utilisées)
-- [Auteurs](#-auteurs)
+- [📝 Description du projet](#-description-du-projet)
+- [🎯 Objectifs](#-objectifs)
+- [❓ Problématiques clés](#-problématiques-clés)
+- [💡 Stratégie proposée](#-stratégie-proposée)
+- [📊 Données exploitées](#-données-exploitées)
+- [📚 Sources de données](#-sources-de-données)
+- [🏆 Résultats attendus](#-résultats-attendus)
+- [🏗️ Architecture du projet](#️-architecture-du-projet)
+- [📈 Analyses prévues](#-analyses-prévues)
+- [💻 Technologies utilisées](#-technologies-utilisées)
+- [👥 Auteurs](#-auteurs)
 
 ---
 
@@ -71,8 +65,9 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 ---
 
 ## 📚 Sources de données
+
 | Source | Description | Format |
-|:------:|:------------|:------:|
+|--------|-------------|--------|
 | [Google Trends API](https://trends.google.com/) | Popularité des mots-clés cosmétiques | CSV / JSON |
 | [Pinterest Trends API](https://trends.pinterest.com/) | Tendances beauté émergentes | CSV |
 | [Kaggle Cosmetics Dataset](https://www.kaggle.com/datasets/devi5723/e-commerce-cosmetics-dataset) | Produits Amazon & Sephora | CSV |
@@ -90,20 +85,17 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ## 🏗️ Architecture du projet
 
-<div align="center">
-  <img src="https://via.placeholder.com/800x400?text=Architecture+du+Projet" alt="Diagramme d'architecture" width="600">
-</div>
-<br>
+![Architecture du projet](https://via.placeholder.com/800x400?text=Architecture+du+Projet)
 
 ### 1. Couche d'ingestion
-**Objectif** : collecter les données brutes<br>
+**Objectif** : collecter les données brutes  
 **Outils** :
 - Apache Kafka (ingestion temps réel)
 - API Google Trends et Pinterest
 - Datasets Kaggle
 
 ### 2. Couche de persistance (Data Lake)
-**Objectif** : stocker et structurer les données<br>
+**Objectif** : stocker et structurer les données  
 **Structure** :
 - **Raw Zone** : données brutes (CSV, JSON)
 - **Processed Zone** : données nettoyées et enrichies
@@ -112,7 +104,7 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 **Technologies** : HDFS / S3, Parquet, Delta Lake
 
 ### 3. Couche Insight / Analyse
-**Objectif** : transformer les données en insights exploitables<br>
+**Objectif** : transformer les données en insights exploitables  
 **Analyses réalisées** :
 - Popularité des mots-clés par saison et par région
 - Identification des produits à mettre en avant
@@ -135,16 +127,12 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ## 💻 Technologies utilisées
 
-<div align="center">
-  <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" alt="Python">
-  <img src="https://img.shields.io/badge/Apache_Spark-FFFFFF?style=for-the-badge&logo=apachespark&logoColor=#E35A16" alt="Apache Spark">
-  <img src="https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=white" alt="Power BI">
-  <img src="https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white" alt="Jupyter">
-  <img src="https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=Selenium&logoColor=white" alt="Selenium">
-  <img src="https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS">
-</div>
-
-<br>
+![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
+![Apache Spark](https://img.shields.io/badge/Apache_Spark-FFFFFF?style=for-the-badge&logo=apachespark&logoColor=#E35A16)
+![Power BI](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626.svg?&style=for-the-badge&logo=Jupyter&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=for-the-badge&logo=Selenium&logoColor=white)
+![AWS](https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
 
 - **Python** : pandas, numpy, pytrends, matplotlib
 - **Big Data** : HDFS / S3, DataLake, Parquet, Delta Lake
@@ -157,36 +145,10 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ## 👥 Auteurs
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/">
-          <img src="https://via.placeholder.com/100x100?text=MK" width="100px;" alt=""/>
-          <br />
-          <sub><b>Mouna KHOLASSI</b></sub>
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/">
-          <img src="https://via.placeholder.com/100x100?text=NT" width="100px;" alt=""/>
-          <br />
-          <sub><b>Narimane TAHIR</b></sub>
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/">
-          <img src="https://via.placeholder.com/100x100?text=LK" width="100px;" alt=""/>
-          <br />
-          <sub><b>Lidia KHELIFI</b></sub>
-        </a>
-      </td>
-    </tr>
-  </table>
-</div>
+- **Mouna KHOLASSI**
+- **Narimane TAHIR**
+- **Lidia KHELIFI**
 
 ---
 
-<div align="center">
-  <p>© 2025 Beauty Analytics Team - Tous droits réservés</p>
-</div>
+© 2025 Beauty Analytics Team - Tous droits réservés
