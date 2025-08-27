@@ -8,36 +8,36 @@
 
 ---
 
-## 📋 Sommaire
-- [📝 Description du projet](#-description-du-projet)
-- [🎯 Objectifs](#-objectifs)
-- [❓ Problématiques clés](#-problématiques-clés)
-- [💡 Stratégie proposée](#-stratégie-proposée)
-- [📊 Données exploitées](#-données-exploitées)
-- [📚 Sources de données](#-sources-de-données)
-- [🏆 Résultats attendus](#-résultats-attendus)
-- [🏗️ Architecture du projet](#️-architecture-du-projet)
-- [📈 Analyses prévues](#-analyses-prévues)
-- [💻 Technologies utilisées](#-technologies-utilisées)
-- [👥 Auteurs](#-auteurs)
+## Sommaire
+- [Description du projet](#description-du-projet)
+- [Objectifs](#objectifs)
+- [Problématiques clés](#problématiques-clés)
+- [Stratégie proposée](#stratégie-proposée)
+- [Données exploitées](#données-exploitées)
+- [Sources de données](#sources-de-données)
+- [Résultats attendus](#résultats-attendus)
+- [Architecture du projet](#architecture-du-projet)
+- [Analyses prévues](#analyses-prévues)
+- [Technologies utilisées](#technologies-utilisées)
+- [Auteurs](#auteurs)
 
 ---
 
-## 📝 Description du projet
+## Description du projet
 Ce projet a pour but d'améliorer le **référencement naturel (SEO)** et la **visibilité digitale** d'une marque de cosmétiques grâce à l'analyse des données et des tendances émergentes.  
 L'objectif est d'optimiser les ventes en ligne en exploitant les comportements consommateurs, les pics de recherche et la veille concurrentielle.
 
 ---
 
-## 🎯 Objectifs
-- 🚀 Améliorer la visibilité SEO des produits cosmétiques
-- 📊 Anticiper les pics de saisonnalité et les tendances émergentes
-- 🔍 Identifier les produits à promouvoir selon les périodes clés et les zones géographiques
-- 📈 Proposer des recommandations marketing et un reporting visuel via un **dashboard Power BI**
+## Objectifs
+- Améliorer la visibilité SEO des produits cosmétiques
+- Anticiper les pics de saisonnalité et les tendances émergentes
+- Identifier les produits à promouvoir selon les périodes clés et les zones géographiques
+- Proposer des recommandations marketing et un reporting visuel via un **dashboard Power BI**
 
 ---
 
-## ❓ Problématiques clés
+## Problématiques clés
 - Comment maximiser la visibilité des produits cosmétiques sur internet ?
 - Quels segments de marché cibler selon la saisonnalité et les tendances ?
 - Quels produits mettre en avant selon les cycles de consommation ?
@@ -45,18 +45,18 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ---
 
-## 💡 Stratégie proposée
-- 📱 Publier du **contenu tendance** basé sur Google Trends
-- 🔎 Optimiser le contenu existant avec des **mots-clés SEO** pertinents
-- 📆 Planifier un **calendrier éditorial saisonnier** (ex : solaires en été, hydratants en hiver)
-- 🌍 Adapter le contenu selon la zone géographique (France, Europe, Monde)
-- ⏱️ Promouvoir le **bon produit au bon moment** (ex : parfums pour la fête des mères)
-- 🔬 Analyser le marché concurrentiel (Amazon, Sephora, AromaZone)
-- 🎥 Optimiser la présence sur **YouTube** pour la visibilité
+## Stratégie proposée
+- Publier du **contenu tendance** basé sur Google Trends
+- Optimiser le contenu existant avec des **mots-clés SEO** pertinents
+- Planifier un **calendrier éditorial saisonnier** (ex : solaires en été, hydratants en hiver)
+- Adapter le contenu selon la zone géographique (France, Europe, Monde)
+- Promouvoir le **bon produit au bon moment** (ex : parfums pour la fête des mères)
+- Analyser le marché concurrentiel (Amazon, Sephora, AromaZone)
+- Optimiser la présence sur **YouTube** pour la visibilité
 
 ---
 
-## 📊 Données exploitées
+## Données exploitées
 - **Google Trends** : popularité des mots-clés cosmétiques
 - **Pinterest Trends** : détection des tendances émergentes beauté
 - **Kaggle** : datasets cosmétiques pour les produits les plus vendus (Amazon, Sephora)
@@ -64,7 +64,7 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ---
 
-## 📚 Sources de données
+## Sources de données
 
 | Source | Description | Format |
 |--------|-------------|--------|
@@ -75,7 +75,7 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ---
 
-## 🏆 Résultats attendus
+## Résultats attendus
 - **Augmentation du trafic organique** grâce à un meilleur positionnement SEO
 - **Amélioration des ventes** via la mise en avant de produits tendance
 - **Réduction du time-to-market** pour les campagnes marketing
@@ -83,7 +83,7 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ---
 
-## 🏗️ Architecture du projet
+## Architecture du projet
 
 ![Architecture du projet](https://via.placeholder.com/800x400?text=Architecture+du+Projet)
 
@@ -118,14 +118,14 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ---
 
-## 📈 Analyses prévues
+## Analyses prévues
 - **Top 10 des tendances de l'industrie cosmétique** (2025 & 2026)
 - **Tendances cosmétiques à surveiller** en 2025
 - Analyse des attentes et enjeux des **consommateurs beauté**
 
 ---
 
-## 💻 Technologies utilisées
+## Technologies utilisées
 
 ![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 ![Apache Spark](https://img.shields.io/badge/Apache_Spark-FFFFFF?style=for-the-badge&logo=apachespark&logoColor=#E35A16)
@@ -143,7 +143,7 @@ L'objectif est d'optimiser les ventes en ligne en exploitant les comportements c
 
 ---
 
-## 👥 Auteurs
+## Auteurs
 
 - **Mouna KHOLASSI**
 - **Narimane TAHIR**
