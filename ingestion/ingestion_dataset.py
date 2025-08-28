@@ -17,10 +17,6 @@ print("Chargement des données...")
 df_reviews = pd.read_csv(os.path.join(os.path.dirname(__file__), "..", "data", file_reviews))
 df_products = pd.read_csv(os.path.join(os.path.dirname(__file__), "..", "data", file_products))
 
-# --- 2. Nettoyage ---
-df_reviews = df_reviews["product_name"].dropna()
-df_products = df_products["rating"].dropna()
-
 # --- 3. Séparation métadonnées ---
 metadata = {
     "reviews": {

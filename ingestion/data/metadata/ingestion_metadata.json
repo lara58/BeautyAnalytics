@@ -3,12 +3,12 @@
         "source":"Gigasheet",
         "filename":"sephora_reviews.csv",
         "nb_rows":1301136,
-        "ingestion_date":"2025-08-28T10:13:05.246793"
+        "ingestion_date":"2025-08-28T10:57:15.039262"
     },
     "products":{
         "source":"Kaggle",
         "filename":"sephora_products.csv",
         "nb_rows":9168,
-        "ingestion_date":"2025-08-28T10:13:05.246793"
+        "ingestion_date":"2025-08-28T10:57:15.039262"
     }
 }
