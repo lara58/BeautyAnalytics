@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import unicodedata
 import psycopg2
-from datetime import datetime
+import json
 
 print("Nettoyage des données...")
 
@@ -30,11 +30,11 @@ files = [
     r"D:\IPSSI\Cours\Datalake\TD_Spark\TP_Groupe\BeautyAnalytics\data\dataset\raw\products_raw.csv"
 ]
 
-# === Suppression des accents ===
-for file_path in files:
-    remplacer_accents_fichier_safe(file_path)
+# === 1. Suppression des accents ===
+# for file_path in files:
+#     remplacer_accents_fichier_safe(file_path)
 
-# === Chargement des datasets ===
+# === 2. Chargement des datasets ===
 try:
     reviews_df = pd.read_csv(files[0], encoding='utf-8')
     products_df = pd.read_csv(files[1], encoding='utf-8')
@@ -52,7 +52,7 @@ products_df = products_df.rename(columns={
 })
 
 
-# === Connexion PostgreSQL avec psycopg2 ===
+# === 3. Connexion PostgreSQL avec psycopg2 ===
 conn = psycopg2.connect(
     dbname="beautyanalytics",
     user="postgres",
@@ -64,7 +64,45 @@ cursor = conn.cursor()
 
 print("Insertion des données...")
 
-# === Insérer les brands uniques ===
+# === 9. Insertion des métadonnées ===
+
+# Charger les métadonnées depuis le fichier JSON
+with open(r"D:\IPSSI\Cours\Datalake\TD_Spark\TP_Groupe\BeautyAnalytics\data\dataset\metadata\ingestion_metadata.json", "r", encoding="utf-8") as f:
+    meta_json = json.load(f)
+
+meta_rows = [
+    (
+        "Sephora Reviews",
+        meta_json["reviews"]["filename"],
+        meta_json["reviews"]["source"],
+        meta_json["reviews"]["nb_rows"],
+        meta_json["reviews"]["ingestion_date"]
+    ),
+    (
+        "Sephora Products",
+        meta_json["products"]["filename"],
+        meta_json["products"]["source"],
+        meta_json["products"]["nb_rows"],
+        meta_json["products"]["ingestion_date"]
+    )
+]
+
+insert_metadata_query = """
+    INSERT INTO metadata (dataset_name, filename, source, nb_rows, ingestion_date)
+    VALUES (%s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
+"""
+try:
+    cursor.executemany(
+        insert_metadata_query,
+        meta_rows
+    )
+    conn.commit()
+    print("Insertion des métadonnées terminée.")
+except Exception as e:
+    conn.rollback()
+    print(f"Erreur lors de l'insertion des métadonnées : {e}")
+
+# === 4. Insérer les brands uniques ===
 brands = products_df["brand_name"].dropna().unique().tolist()
 insert_brands_query = "INSERT INTO brands (brand_name) VALUES (%s) ON CONFLICT DO NOTHING;"
 
@@ -76,7 +114,7 @@ except Exception as e:
     conn.rollback()
     print(f"Erreur lors de l'insertion des marques : {e}")
 
-# === Insérer les categories uniques ===
+# === 5. Insérer les categories uniques ===
 categories = products_df["category_name"].dropna().unique().tolist()
 insert_categories_query = "INSERT INTO category (category_name) VALUES (%s) ON CONFLICT DO NOTHING;"
 
@@ -103,7 +141,7 @@ products_df = products_df.merge(categories_db_unique, on="category_name", how="l
 
 products_df_final = products_df[["product_name", "brand_id", "category_id", "price", "rating", "love"]]
 
-# --- Insertion dans la table products ---
+# --- 7. Insertion dans la table products ---
 insert_products_query = """
     INSERT INTO products (product_name, brand_id, category_id, price, rating, love)
     VALUES (%s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
@@ -120,87 +158,42 @@ except Exception as e:
     print(f"Erreur lors de l'insertion des produits : {e}")
 
 # === Récupérer products avec leurs IDs pour les reviews ===
-products_db = pd.read_sql("SELECT * FROM products", conn)
-
+products_db = pd.read_sql("SELECT product_id, product_name FROM products", conn)
 # --- Joindre reviews avec products et brands pour avoir les IDs ---
-
-# Nettoyage des valeurs brand_name pour garantir la jointure
-reviews_df["brand_name"] = reviews_df["brand_name"].astype(str).str.strip().str.lower()
-brands_db_unique["brand_name"] = brands_db_unique["brand_name"].astype(str).str.strip().str.lower()
-
-reviews_df = reviews_df.merge(products_db, on="product_name", how="left")
+reviews_df = reviews_df.merge(products_db[['product_id','product_name']], on="product_name", how="left")
 reviews_df = reviews_df.merge(brands_db_unique, on="brand_name", how="left")
 
-# Correction : choisir la bonne colonne brand_id
-if "brand_id_x" in reviews_df.columns:
-    reviews_df["brand_id"] = reviews_df["brand_id_x"]
-elif "brand_id_y" in reviews_df.columns:
-    reviews_df["brand_id"] = reviews_df["brand_id_y"]
-
-# Vérification et sélection des colonnes pour reviews_df_final
-expected_cols = ["product_id", "brand_id", "submission_time",
+reviews_df_final = reviews_df[["product_id", "brand_id", "submission_time",
     "total_neg_feedback_count", "total_pos_feedback_count",
-    "price_usd", "is_recommended"]
-missing_cols = [col for col in expected_cols if col not in reviews_df.columns]
-if missing_cols:
-    print(f"Colonnes manquantes dans reviews_df : {missing_cols}")
-    # Optionnel : raise ou exit
-reviews_df_final = reviews_df[[col for col in expected_cols if col in reviews_df.columns]]
+    "price_usd", "is_recommended"]]
 
-# --- Insertion dans la table reviews ---
-insert_reviews_query = """
-    INSERT INTO reviews (
-        product_id, brand_id, review_date,
-        total_neg_feedback_count, total_pos_feedback_count,
-        price_usd, is_recommended
-    )
-    VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
-"""
-try:
-    cursor.executemany(
-        insert_reviews_query,
-        [tuple(x) for x in reviews_df_final.to_numpy()]
-    )
+
+# --- 8. Insertion dans la table reviews ---
+print('Insertion des reviews...')
+# 1. Supprimer les lignes sans product_id ou brand_id
+reviews_df_final = reviews_df_final.dropna(subset=['product_id','brand_id'])
+reviews_df_final['product_id'] = reviews_df_final['product_id'].astype(int)
+reviews_df_final['brand_id'] = reviews_df_final['brand_id'].astype(int)
+# 2. Remplacer les NaN facultatifs par \N
+reviews_df_final = reviews_df_final.fillna('\\N')
+
+# 3. Export CSV
+reviews_df_final.to_csv("reviews_temp.csv", index=False, header=False)
+
+# 4. COPY
+with psycopg2.connect(dbname="beautyanalytics", user="postgres",
+                      password="postgres", host="localhost", port="5432") as conn:
+    with conn.cursor() as cursor:
+        with open("reviews_temp.csv", "r") as f:
+            cursor.copy_from(f, "reviews", sep=",",
+                             columns=("product_id", "brand_id", "review_date",
+                                      "total_neg_feedback_count", "total_pos_feedback_count",
+                                      "price_usd", "is_recommended"))
     conn.commit()
-    print("Insertion des reviews terminée.")
-except Exception as e:
-    conn.rollback()
-    print(f"Erreur lors de l'insertion des reviews : {e}")
 
-# === Insertion des métadonnées ===
-metadata = pd.DataFrame([
-    {
-        "dataset_name": "Sephora Products",
-        "filename": "sephora_products.csv",
-        "source": "Kaggle",
-        "nb_rows": len(products_df),
-        "ingestion_date": datetime.now()
-    },
-    {
-        "dataset_name": "Sephora Reviews",
-        "filename": "sephora_reviews.csv",
-        "source": "Gigasheet",
-        "nb_rows": len(reviews_df),
-        "ingestion_date": datetime.now()
-    }
-])
+print("Insertion des reviews terminée !")
 
-insert_metadata_query = """
-    INSERT INTO metadata (dataset_name, filename, source, nb_rows, ingestion_date)
-    VALUES (%s, %s, %s, %s, %s) ON CONFLICT DO NOTHING;
-"""
-try:
-    cursor.executemany(
-        insert_metadata_query,
-        [tuple(x) for x in metadata.to_numpy()]
-    )
-    conn.commit()
-    print("Insertion des métadonnées terminée.")
-except Exception as e:
-    conn.rollback()
-    print(f"Erreur lors de l'insertion des métadonnées : {e}")
-
-# === Fermeture de la connexion ===
+# === 10. Fermeture de la connexion ===
 cursor.close()
 conn.close()
 

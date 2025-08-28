@@ -50,3 +50,15 @@ CREATE TABLE
         nb_rows                    INT,
         ingestion_date             TIMESTAMP
     );
+
+-- Index sur la colonne product_id de reviews
+CREATE INDEX idx_reviews_product_id ON reviews(product_id);
+
+-- Index sur la colonne brand_id de reviews
+CREATE INDEX idx_reviews_brand_id ON reviews(brand_id);
+
+-- Index sur la colonne brand_name de brands
+CREATE INDEX idx_brands_brand_name ON brands(brand_name);
+
+-- Index sur la colonne category_id de products
+CREATE INDEX idx_products_category_id ON products(category_id);
