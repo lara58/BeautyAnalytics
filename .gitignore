@@ -1,0 +1,16 @@
+# Dossier de données Pinterest
+data_pinterest/
+
+# Fichiers générés
+Top10_Pinterest_Annuel.csv
+Top10_Pinterest_Comparatif.csv
+Top10_Pinterest_Saisonnier.csv
+
+# Environnement Python
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Autres fichiers temporaires
+*.pyc
+*.log
