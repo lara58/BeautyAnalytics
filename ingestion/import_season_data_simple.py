@@ -1,0 +1,130 @@
+import psycopg2
+import csv
+import os
+from config import DB_CONFIG
+
+# Chemin vers le fichier CSV
+csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
+                        'data_pinterest', 'final_season_clean.csv')
+
+# Afficher le chemin pour vérification
+print(f"Lecture du fichier: {csv_path}")
+
+try:
+    # Connexion à PostgreSQL 
+    print("Connexion à PostgreSQL...")
+    conn = psycopg2.connect(
+        host=DB_CONFIG['host'],
+        port=DB_CONFIG['port'],
+        dbname=DB_CONFIG['dbname'],
+        user=DB_CONFIG['user'],
+        password=DB_CONFIG['password']
+    )
+    conn.autocommit = True
+    
+    # SQL pour créer la table
+    create_table_sql = """
+    DROP TABLE IF EXISTS public.trends_season;
+
+    CREATE TABLE public.trends_season (
+        "Rang" INT NULL,
+        "Tendance" TEXT NULL,
+        "Variation hebdomadaire" TEXT NULL,
+        "Variation mensuelle" TEXT NULL,
+        "Variation annuelle" TEXT NULL,
+        "2024-08-13" TEXT NULL,
+        "2024-08-20" TEXT NULL,
+        "2024-08-27" TEXT NULL,
+        "2024-09-03" TEXT NULL,
+        "2024-09-10" TEXT NULL,
+        "2024-09-17" TEXT NULL,
+        "2024-09-24" TEXT NULL,
+        "2024-10-01" TEXT NULL,
+        "2024-10-08" TEXT NULL,
+        "2024-10-15" TEXT NULL,
+        "2024-10-22" TEXT NULL,
+        "2024-10-29" TEXT NULL,
+        "2024-11-05" TEXT NULL,
+        "2024-11-12" TEXT NULL,
+        "2024-11-19" TEXT NULL,
+        "2024-11-26" TEXT NULL,
+        "2024-12-03" TEXT NULL,
+        "2024-12-10" TEXT NULL,
+        "2024-12-17" TEXT NULL,
+        "2024-12-24" TEXT NULL,
+        "2024-12-31" TEXT NULL,
+        "2025-01-07" TEXT NULL,
+        "2025-01-14" TEXT NULL,
+        "2025-01-21" TEXT NULL,
+        "2025-01-28" TEXT NULL,
+        "2025-02-04" TEXT NULL,
+        "2025-02-11" TEXT NULL,
+        "2025-02-18" TEXT NULL,
+        "2025-02-25" TEXT NULL,
+        "2025-03-04" TEXT NULL,
+        "2025-03-11" TEXT NULL,
+        "2025-03-18" TEXT NULL,
+        "2025-03-25" TEXT NULL,
+        "2025-04-01" TEXT NULL,
+        "2025-04-08" TEXT NULL,
+        "2025-04-15" TEXT NULL,
+        "2025-04-22" TEXT NULL,
+        "2025-04-29" TEXT NULL,
+        "2025-05-06" TEXT NULL,
+        "2025-05-13" TEXT NULL,
+        "2025-05-20" TEXT NULL,
+        "2025-05-27" TEXT NULL,
+        "2025-06-03" TEXT NULL,
+        "2025-06-10" TEXT NULL,
+        "2025-06-17" TEXT NULL,
+        "2025-06-24" TEXT NULL,
+        "2025-07-01" TEXT NULL,
+        "2025-07-08" TEXT NULL,
+        "2025-07-15" TEXT NULL,
+        "2025-07-22" TEXT NULL,
+        "2025-07-29" TEXT NULL,
+        "2025-08-05" TEXT NULL,
+        "2025-08-12" TEXT NULL,
+        "2025-08-13" TEXT NULL
+    );
+    """
+    
+    # Créer la table
+    print("Création de la table trends_season...")
+    with conn.cursor() as cursor:
+        cursor.execute(create_table_sql)
+        print("Table créée avec succès!")
+    
+    # Lire et insérer les données CSV
+    print("Lecture et importation des données...")
+    with open(csv_path, 'r', encoding='Windows-1252', errors='ignore') as f:
+        reader = csv.reader(f)
+        headers = next(reader)  # Lire l'en-tête
+        
+        # Préparer la requête d'insertion
+        placeholders = ','.join(['%s'] * len(headers))
+        insert_query = f"""
+        INSERT INTO public.trends_season ({','.join([f'"{col}"' for col in headers])}) 
+        VALUES ({placeholders})
+        """
+        
+        # Compter les lignes importées
+        row_count = 0
+        
+        # Insérer chaque ligne
+        with conn.cursor() as cursor:
+            for row in reader:
+                # Remplacer les chaînes vides par None
+                values = [None if val == '' else val for val in row]
+                cursor.execute(insert_query, values)
+                row_count += 1
+        
+        print(f"Nombre de lignes importées: {row_count}")
+    
+    print("Importation terminée avec succès!")
+    
+except Exception as e:
+    print(f"Erreur lors de l'importation: {e}")
+finally:
+    if 'conn' in locals():
+        conn.close()
