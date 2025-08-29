@@ -2,18 +2,19 @@ import os
 import pandas as pd
 from datetime import datetime
 
-RAW_DIR = "data/raw"
-META_DIR = "data/metadata"
+RAW_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "pinterest_trends", "raw")
+META_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "pinterest_trends", "metadata")
 
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(META_DIR, exist_ok=True)
 
-file_reviews = "sephora_reviews.csv"
-file_products = "sephora_products.csv"
+file_reviews = "final_season_clean.csv"
+file_products = "final_year.csv"
 
 print("Chargement des données...")
-df_reviews = pd.read_csv(os.path.join(os.path.dirname(__file__), "..", "data", file_reviews))
-df_products = pd.read_csv(os.path.join(os.path.dirname(__file__), "..", "data", file_products))
+df_reviews = pd.read_csv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "pinterest_trends", file_reviews))
+df_products = pd.read_csv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "pinterest_trends", file_products))
+
 metadata = {
     "reviews": {
         "source": "Pinterest",

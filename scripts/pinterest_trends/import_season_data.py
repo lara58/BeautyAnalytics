@@ -3,8 +3,8 @@ import psycopg2
 import os
 from config import DB_CONFIG
 
-csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
-                        'data_pinterest', 'final_season_clean.csv')
+csv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
+                        'data', 'pinterest_trends', 'final_season_clean.csv')
 
 print(f"Lecture du fichier: {csv_path}")
 
@@ -12,6 +12,7 @@ df = pd.read_csv(csv_path)
 
 print("Aperçu des données:")
 print(df.head())
+
 create_table_sql = """
 DROP TABLE IF EXISTS public.trends_season;
 
