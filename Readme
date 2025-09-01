@@ -66,7 +66,6 @@ Il vise à optimiser les ventes en ligne en exploitant les comportements des con
 * **Google Trends** : popularité des mots-clés cosmétiques
 * **Pinterest Trends** : détection des tendances beauté émergentes
 * **Kaggle** : datasets cosmétiques (produits les plus vendus : Amazon, Sephora)
-* **Scraping e-commerce** : prix, ventes et avis produits
 
 ---
 
@@ -100,7 +99,7 @@ Il vise à optimiser les ventes en ligne en exploitant les comportements des con
 ### 1. Couche d’ingestion
 
 * **Objectif** : collecter les données brutes
-* **Outils** : Apache Kafka, API Google Trends & Pinterest, datasets Kaggle
+* **Outils** :  API Google Trends & Pinterest, datasets Kaggle
 
 ### 2. Couche de persistance (Data Lake)
 
@@ -110,7 +109,7 @@ Il vise à optimiser les ventes en ligne en exploitant les comportements des con
   * **Raw Zone** : données brutes (CSV, JSON)
   * **Processed Zone** : données nettoyées et enrichies
   * **Curated Zone** : datasets optimisés pour l’analyse SEO
-* **Technologies** : HDFS / S3, Parquet, Delta Lake
+* **Technologies** :  Data Lake
 
 ### 3. Couche Insight / Analyse
 
@@ -137,10 +136,9 @@ Il vise à optimiser les ventes en ligne en exploitant les comportements des con
 ![pgAdmin](https://img.shields.io/badge/pgAdmin-336791?style=for-the-badge\&logo=postgresql\&logoColor=white)
 
 * **Python** : pandas, numpy, pytrends, matplotlib
-* **Big Data** : HDFS / S3, DataLake, Parquet, Delta Lake
+* **Big Data** : DataLake
 * **SEO & Tendances** : Google Trends API, Pinterest Trends
 * **Dashboarding** : Power BI
-* **Scraping** : Selenium, BeautifulSoup
 * **Exploration** : Jupyter Notebooks
 
 ---
